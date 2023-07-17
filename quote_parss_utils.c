@@ -6,7 +6,7 @@
 /*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:15:43 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/13 15:25:49 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/07/14 10:23:21 by iszitoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	sec_q(char *tknz)
 			return (i);
 		i--;
 	}
-	return (lerreurat(3));
+	return (0);
 }
 
 int	sec_s_q(char *tknz)
@@ -51,6 +51,7 @@ int	sec_s_q(char *tknz)
 			return (i);
 		i--;
 	}
+	printf("1\n");
 	return (lerreurat(3));
 }
 

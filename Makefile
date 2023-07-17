@@ -11,6 +11,7 @@ src = main.c\
 		toke_it_utils1.c\
 		parssing_utils.c\
 		parssing_utils1.c\
+		parssing_utils2.c\
 		quote_parss_utils.c\
 		quote_parss_utils1.c\
 		env_parss.c\

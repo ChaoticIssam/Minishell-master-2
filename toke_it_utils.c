@@ -6,7 +6,7 @@
 /*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:11:20 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/13 15:11:27 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/07/14 09:59:16 by iszitoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,8 @@ void	xdqbp(t_tokenz *m, char *str)
 	if (str[m->i] == '"')
 		m->array[m->j] = '3';
 	else
+	{
+		printf("2\n");		
 		lerreurat(3);
+	}
 }

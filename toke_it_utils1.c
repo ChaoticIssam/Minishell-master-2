@@ -6,7 +6,7 @@
 /*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:11:32 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/13 15:11:36 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/07/14 09:59:32 by iszitoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	xsqbp(t_tokenz *m, char *str)
 	if (str[m->i] == '\'')
 		m->array[m->j] = '0';
 	else
+	{
+		printf("3\n");	
 		lerreurat(3);
+	}
 }
 
 void	dquotes_tokenz(t_tokenz *m, char *str)

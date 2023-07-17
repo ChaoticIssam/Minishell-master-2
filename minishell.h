@@ -6,7 +6,7 @@
 /*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:58:49 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/13 15:23:59 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/07/14 10:26:56 by iszitoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ typedef struct s_tokenz
 	int					count;
 	char				*array;
 }						t_tokenz;
+
+typedef struct s_commande
+{
+	char				**commande;
+	int					j;
+	int					x;
+	int					start;
+	int					end;
+	int					ptr_num;
+	int					lock;
+	int					lock1;
+	int					tmp;
+}						t_commande;
 
 typedef struct s_commandes
 {
@@ -93,7 +106,16 @@ char					*fill_path(char **env, t_env *s);
 char					*var_gett(char **env, int i);
 int						num_of_q(char *list, int start);
 char					**return_file(char *list, char *str, int bool);
+
+void					for_quotes(t_commande *s, int i, char *str, char *list);
+void					get_end(t_commande *s, int i, char *list);
+void					get_start(t_commande *s, int i, char *list);
+void					last_world_ig(t_commande *s, char *str, int i);
+void					get_commande(t_commande *s, char *str);
+void					skip_sp(t_commande *s, char *list, int i);
+
 int						num_of_s_q(char *list, int start);
+int						quotes_error(char *list);
 int						sec_s_q(char *tknz);
 int						expand_erreur(char *list);
 int						lerreurat(int error);

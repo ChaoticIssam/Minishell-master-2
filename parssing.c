@@ -6,39 +6,36 @@
 /*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:58:57 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/13 15:27:40 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/07/14 10:31:00 by iszitoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	int_commande_var(t_commande *s, char *list, int bool)
+{
+	s->x = 0;
+	s->start = 0;
+	s->j = 0;
+	s->end = 0;
+	s->ptr_num = count_ptr(list, bool);
+	s->commande = calloc(sizeof(char *), s->ptr_num + 2);
+	s->lock = 0;
+	s->lock1 = 1;
+	s->tmp = 0;
+}
+
 char	**return_commande(char *list, char *str, int bool)
 {
-	char		**commande;
+	t_commande	*s;
 	static int	i;
-	int			j;
-	int			x;
-	int			lock;
-	int			lock1;
-	int			tmp;
-	int			start;
-	int			end;
-	int			ptr_num;
 
-	x = 0;
-	lock = 0;
-	lock1 = 1;
-	tmp = 0;
-	start = 0;
-	j = 0;
-	end = 0;
+	s = malloc(sizeof(t_commande));
+	int_commande_var(s, list, bool);
 	if (bool == 1)
 		i = 0;
-	ptr_num = count_ptr(list, bool);
-	printf("---->%d\n", ptr_num);
-	printf("i ->%d\n", i);
-	commande = calloc(sizeof(char *), ptr_num + 2);
 	expand_erreur(list);
+	// quotes_error(list);
 	if (list[i] == '6')
 		i++;
 	while (list[i] == '2')
@@ -47,64 +44,41 @@ char	**return_commande(char *list, char *str, int bool)
 	{
 		if (list[i] == '3' || list[i] == '0')
 		{
-			j = i;
-			commande[x] = quotes_quotes(str, list, i);
+			s->j = i;
+			printf("*********>>%d\n", s->j);
+			s->commande[s->x] = quotes_quotes(str, list, i);
 			if (quote_bfr_pipe(str, i, list[i]))
 				i = quote_bfr_pipe(str, i, list[i]);
 			else if (!quote_bfr_pipe(str, i, list[i]))
-				i = j;
+				i = s->j;
 			if (list[i] == '3')
-				i = sec_q_rex(list, i);
-			else if (list[i] == '0')
-				i = sec_q_rex(list, i);
-			start = i + 1;
-			x++;
-		}
-		if (((list[i] != tmp) || list[i + 1] == '6' || !list[i + 1]))
-		{
-			end = i - 1;
-			if (i + 1 <= ft_strlen(list) && !list[i + 1])
-				end = i;
-			lock1 = 0;
-			lock = 1;
-			if (i + 1 <= ft_strlen(list) && list[i + 1] == '6')
 			{
-				end = i;
-				if (list[i] == '2')
-					end = i - 1;
-				lock = 0;
+				i = sec_q_rex(list, i);
+				printf("i ====>%d\n", i);
 			}
+			else if (list[i] == '0')
+			{
+				i = sec_q_rex(list, i);
+				printf("i +++++>%d\n", i);
+			}
+			s->start = i + 1;
+			s->x++;
 		}
-		if ((list[i] == '1') && list[i] != '3' && lock && list[i + 1])
-		{
-			start = i;
-			lock = 0;
-			lock1 = 1;
-			tmp = list[i];
-		}
+		if (((list[i] != s->tmp) || list[i + 1] == '6' || !list[i + 1]))
+			get_end(s, i, list);
+		if ((list[i] == '1') && list[i] != '3' && s->lock && list[i + 1])
+			get_start(s, i, list);
 		if (i != 0 && i + 1 < ft_strlen(list) && list[i] == '1' && list[i
 			- 1] == '2' && !list[i + 1])
-		{
-			commande[x] = &str[i];
-			x++;
-		}
-		if (!lock1 && list[i] != '3' && str[start] != '"' && str[start] != '\''
-			&& end >= start)
-		{
-			commande[x] = ft_substr(str, start, end - start + 1);
-			x++;
-		}
+			last_world_ig(s, str, i);
+		if (!s->lock1 && list[i] != '3' && str[s->start] != '"'
+			&& str[s->start] != '\'' && s->end >= s->start)
+			get_commande(s, str);
 		if (list[i] == '2' && list[i + 1] == '2')
-		{
-			while (list[i] == '2')
-				i++;
-			i--;
-			start = i;
-			lock1 = 0;
-		}
+			skip_sp(s, list, i);
 		i++;
 	}
-	return (commande);
+	return (s->commande);
 }
 
 char	**return_file(char *list, char *str, int bool)
@@ -127,12 +101,14 @@ char	**return_file(char *list, char *str, int bool)
 		i++;
 	while (list[i] && list[i] != '6')
 	{
-		if (ft_isredi(list[i]) == 1)
+		while (ft_isredi(list[i] == 1 || list[i] == '2'))
+			i++;
+		if (list[i] == '1')
 		{
-			start = i;
-			if (i > 0)
-				start = i + 1;
-			while (list[i] != '2' && list[i])
+			start = i + 1;
+			// if (i > 0)
+			// 	start = i + 1;
+			while (list[i] != '2' && list[i] && !ft_isredi(list[i]))
 				i++;
 			if (i > start)
 				end = i;
