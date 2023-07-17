@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parssing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deimos <deimos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:58:57 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/14 10:31:00 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/07/17 23:26:23 by deimos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**return_commande(char *list, char *str, int bool)
 			get_end(s, i, list);
 		if ((list[i] == '1') && list[i] != '3' && s->lock && list[i + 1])
 			get_start(s, i, list);
-		if (i != 0 && i + 1 < ft_strlen(list) && list[i] == '1' && list[i
+		if (i != 0 && i + 1 <= ft_strlen(list) && list[i] == '1' && list[i
 			- 1] == '2' && !list[i + 1])
 			last_world_ig(s, str, i);
 		if (!s->lock1 && list[i] != '3' && str[s->start] != '"'

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   toke_it_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deimos <deimos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:11:32 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/14 09:59:32 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/07/17 23:25:49 by deimos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ void	xsqbp(t_tokenz *m, char *str)
 
 void	dquotes_tokenz(t_tokenz *m, char *str)
 {
-	int	tmp;
-
-	tmp = 0;
 	m->array[m->j] = '3';
 	if (quote_bfr_pipe(str, m->i, '"'))
 		dqbp(m, str);
@@ -42,9 +39,6 @@ void	dquotes_tokenz(t_tokenz *m, char *str)
 
 void	squotes_tokenz(t_tokenz *m, char *str)
 {
-	int	tmp;
-
-	tmp = 0;
 	m->array[m->j] = '0';
 	if (quote_bfr_pipe(str, m->i, '\''))
 		sqbp(m, str);
