@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parssing_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deimos <deimos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 07:38:18 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/14 10:19:58 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:13:48 by deimos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,15 @@
 void	for_quotes(t_commande *s, int i, char *str, char *list)
 {
 	s->j = i;
-	printf("*********>>%d\n", s->j);
 	s->commande[s->x] = quotes_quotes(str, list, i);
 	if (quote_bfr_pipe(str, i, list[i]))
 		i = quote_bfr_pipe(str, i, list[i]);
 	else if (!quote_bfr_pipe(str, i, list[i]))
 		i = s->j;
 	if (list[i] == '3')
-	{
 		i = sec_q_rex(list, i);
-		printf("i ====>%d\n", i);
-	}
 	else if (list[i] == '0')
-	{
 		i = sec_q_rex(list, i);
-		printf("i +++++>%d\n", i);
-	}
 	s->start = i + 1;
 	s->x++;
 }
@@ -59,10 +52,9 @@ void	get_start(t_commande *s, int i, char *list)
 	s->tmp = list[i];
 }
 
-void	last_world_ig(t_commande *s, char *str, int i)
+void	last_world_ig(t_commande *s, int i)
 {
-	s->commande[s->x] = &str[i];
-	s->x++;
+	s->start = i;
 }
 
 void	get_commande(t_commande *s, char *str)

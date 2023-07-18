@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deimos <deimos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:58:49 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/14 10:26:56 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:09:05 by deimos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ typedef struct s_commande
 typedef struct s_commandes
 {
 	char				**commande;
+	// char				*infile;
+	// char				*outfile;
+	// char				*herdock;
+	// char				*
 	char				**files;
 	struct s_commandes	*next;
 }						t_commandes;
@@ -110,7 +114,7 @@ char					**return_file(char *list, char *str, int bool);
 void					for_quotes(t_commande *s, int i, char *str, char *list);
 void					get_end(t_commande *s, int i, char *list);
 void					get_start(t_commande *s, int i, char *list);
-void					last_world_ig(t_commande *s, char *str, int i);
+void					last_world_ig(t_commande *s, int i);
 void					get_commande(t_commande *s, char *str);
 void					skip_sp(t_commande *s, char *list, int i);
 

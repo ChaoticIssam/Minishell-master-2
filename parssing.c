@@ -6,7 +6,7 @@
 /*   By: deimos <deimos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:58:57 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/17 23:26:23 by deimos           ###   ########.fr       */
+/*   Updated: 2023/07/18 17:12:37 by deimos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,25 @@ char	**return_commande(char *list, char *str, int bool)
 	if (bool == 1)
 		i = 0;
 	expand_erreur(list);
-	// quotes_error(list);
 	if (list[i] == '6')
 		i++;
 	while (list[i] == '2')
 		i++;
-	while (i + 1 <= ft_strlen(list) && list[i] && list[i] < 52)
+	while (i + 1 <= ft_strlen(list) && list[i] && list[i] < 52 && s->x <= count_ptr(list, bool))
 	{
 		if (list[i] == '3' || list[i] == '0')
 		{
 			s->j = i;
-			printf("*********>>%d\n", s->j);
 			s->commande[s->x] = quotes_quotes(str, list, i);
 			if (quote_bfr_pipe(str, i, list[i]))
 				i = quote_bfr_pipe(str, i, list[i]);
 			else if (!quote_bfr_pipe(str, i, list[i]))
 				i = s->j;
 			if (list[i] == '3')
-			{
 				i = sec_q_rex(list, i);
-				printf("i ====>%d\n", i);
-			}
 			else if (list[i] == '0')
 			{
 				i = sec_q_rex(list, i);
-				printf("i +++++>%d\n", i);
 			}
 			s->start = i + 1;
 			s->x++;
@@ -70,7 +64,7 @@ char	**return_commande(char *list, char *str, int bool)
 			get_start(s, i, list);
 		if (i != 0 && i + 1 <= ft_strlen(list) && list[i] == '1' && list[i
 			- 1] == '2' && !list[i + 1])
-			last_world_ig(s, str, i);
+			s->start = i;
 		if (!s->lock1 && list[i] != '3' && str[s->start] != '"'
 			&& str[s->start] != '\'' && s->end >= s->start)
 			get_commande(s, str);
@@ -112,7 +106,6 @@ char	**return_file(char *list, char *str, int bool)
 				i++;
 			if (i > start)
 				end = i;
-			printf("end ->%d and start ->%d\n", end, start);
 			files[x] = ft_substr(str, start, end - start + 1);
 			x++;
 		}
