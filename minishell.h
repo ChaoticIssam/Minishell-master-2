@@ -6,7 +6,7 @@
 /*   By: deimos <deimos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:58:49 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/18 17:09:05 by deimos           ###   ########.fr       */
+/*   Updated: 2023/07/20 00:22:14 by deimos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_commandes
 	// char				*infile;
 	// char				*outfile;
 	// char				*herdock;
-	// char				*
+	// char				*append;
 	char				**files;
 	struct s_commandes	*next;
 }						t_commandes;

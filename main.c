@@ -6,7 +6,7 @@
 /*   By: deimos <deimos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:58:37 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/18 17:15:42 by deimos           ###   ########.fr       */
+/*   Updated: 2023/07/20 00:53:41 by deimos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	main(int ac, char **av, char **env)
 		senv->env_len = env_len(m);
 		check_bill(tmp, senv, env);
 		/*print ptrs*/
-		// while (tmp->files[x])
-		// {
-		// 	ft_putstr(tmp->files[x]);
-		// 	printf("->\n");
-		// 	x++;
-		// }
+		while (tmp->files[x])
+		{
+			ft_putstr(tmp->files[x]);
+			printf("<-\n");
+			x++;
+		}
 		while (tmp->commande[j])
 		{
 			ft_putstr(tmp->commande[j]);

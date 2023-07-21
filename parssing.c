@@ -6,7 +6,7 @@
 /*   By: deimos <deimos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:58:57 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/18 17:12:37 by deimos           ###   ########.fr       */
+/*   Updated: 2023/07/20 00:22:46 by deimos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,13 @@ char	**return_commande(char *list, char *str, int bool)
 		i++;
 	while (list[i] == '2')
 		i++;
-	while (i + 1 <= ft_strlen(list) && list[i] && list[i] < 52 && s->x <= count_ptr(list, bool))
+	while (i + 1 <= ft_strlen(list) && list[i] && s->x <= count_ptr(list, bool))
 	{
+		if (ft_isredi(list[i]))
+		{
+			return_file(list, str, bool);
+			
+		}
 		if (list[i] == '3' || list[i] == '0')
 		{
 			s->j = i;
@@ -93,19 +98,17 @@ char	**return_file(char *list, char *str, int bool)
 		i++;
 	while (list[i] == '2')
 		i++;
-	while (list[i] && list[i] != '6')
+	while (list[i] && list[i] != '6' && ft_isredi(list[i]))
 	{
-		while (ft_isredi(list[i] == 1 || list[i] == '2'))
+		while (ft_isredi(list[i]) || list[i] == '2')
 			i++;
 		if (list[i] == '1')
 		{
-			start = i + 1;
-			// if (i > 0)
-			// 	start = i + 1;
+			start = i;
 			while (list[i] != '2' && list[i] && !ft_isredi(list[i]))
 				i++;
 			if (i > start)
-				end = i;
+				end = i - 1;
 			files[x] = ft_substr(str, start, end - start + 1);
 			x++;
 		}
